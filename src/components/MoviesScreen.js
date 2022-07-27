@@ -1,34 +1,34 @@
+import {useState, useEffect} from "react";
+import axios from "axios";
+
 import "./components.css";
 
 export default function MoviesScreen() {
+    const [movies, setMovies] = useState([]);
+
+    useEffect(() => {
+        const requisicao = axios.get("https://mock-api.driven.com.br/api/v5/cineflex/movies");
+
+        requisicao.then(resposta => {
+            setMovies(resposta.data);
+        })
+    }, []);
+
+    console.log(movies);
     return (
-        <div>
+        <>
             <div className="selectionTitle">
                 <p>Selecione o filme</p>
             </div>
 
             <div className="movies">
-                <div className="movieBanner">
-                    <img src="https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg" alt="" className="Tudo em Todo o Lugar ao Mesmo Tempo Banner" />
-                    {/* <Link to="/sessoes/:idFilme"></Link> */}
-                </div>
-
-                <div className="movieBanner">
-                    <img src="https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg" alt="" className="Tudo em Todo o Lugar ao Mesmo Tempo Banner" />
-                    {/* <Link to="/sessoes/:idFilme"></Link> */}
-                </div>
-
-                <div className="movieBanner">
-                    <img src="https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg" alt="" className="Tudo em Todo o Lugar ao Mesmo Tempo Banner" />
-                    {/* <Link to="/sessoes/:idFilme"></Link> */}
-                </div>
-
-                <div className="movieBanner">
-                    <img src="https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg" alt="" className="Tudo em Todo o Lugar ao Mesmo Tempo Banner" />
-                    {/* <Link to="/sessoes/:idFilme"></Link> */}
-                </div>
+                {movies.map((movie, index) => (
+                    <div className="movieBanner">
+                        <img src={movie.posterURL} alt={index} />
+                    </div>
+                ))}
             </div>
             
-        </div>
+        </>
     );
 }
