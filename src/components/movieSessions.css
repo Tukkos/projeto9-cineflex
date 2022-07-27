@@ -1,0 +1,38 @@
+.selectionTitle {
+    margin-top: 70px;
+    height: 110px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.selectionTitle>p {
+    font-size: 25px;
+}
+
+.movieSessions {
+    margin: 25px;
+}
+
+.session {
+    font-size: 20px;
+}
+
+.session>div {
+    display: flex;
+}
+
+.times {
+    width: 85px;
+    height: 45px;
+    border-radius: 3px;
+    margin: 0 4px 15px 4px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #E8833A;
+    font-size: 18px;
+}

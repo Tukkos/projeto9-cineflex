@@ -1,7 +1,7 @@
 import {useState, useEffect} from "react";
 import axios from "axios";
 
-import "./components.css";
+import "./moviesScreen.css";
 
 export default function MoviesScreen() {
     const [movies, setMovies] = useState([]);
