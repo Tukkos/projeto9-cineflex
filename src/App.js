@@ -4,6 +4,7 @@ import "./app.css";
 import Header from "./components/Header";
 import MoviesScreen from "./components/MoviesScreen";
 import MovieSessions from "./components/MovieSessions";
+import MovieSeats from "./components/MovieSeats";
 
 export default function App() {
     return (
@@ -14,8 +15,8 @@ export default function App() {
                 {/* LEMBRAR DE ARRUMAR OS PATHS--------------------------------------------------------------------------------- */}
                 <Route path="/aa" element={ <MoviesScreen /> } />
 
-                <Route path="/" element={<MovieSessions />} />
-                {/* <Route path="/assentos/:idSessao" element={<MovieSeats />} /> */}
+                <Route path="/sessoes/:idFilme" element={<MovieSessions />} />
+                <Route path="/" element={<MovieSeats />} />
                 {/* <Route path="/sucesso" element={<SuccessScreen />} /> */}
             </Routes>
 

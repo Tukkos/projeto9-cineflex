@@ -1,0 +1,71 @@
+.seats {
+    margin: 0 15px 0 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.seats div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.key {
+    margin: 0 15px 0 15px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.key div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.selected {
+    width: 26px;
+    height: 26px;
+    background: #8DD7CF;
+    border: 1px solid #1AAE9E;
+    border-radius: 13px;
+    margin: 7px 7px 7px 7px;
+}
+
+.available {
+    width: 26px;
+    height: 26px;
+    background: #C3CFD9;
+    border: 1px solid #808F9D;
+    border-radius: 13px;
+    margin: 7px 7px 7px 7px;
+}
+
+.notAvailable {
+    width: 26px;
+    height: 26px;
+    background: #F7C52B;
+    border: 1px solid #FBE192;
+    border-radius: 13px;
+    margin: 7px 7px 7px 7px;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 15px 120px 15px;
+    font-size: 20px;
+}
+
+.inputs input {
+    height: 50px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-style: italic;
+    color: #AFAFAF;
+}

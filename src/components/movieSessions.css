@@ -1,18 +1,5 @@
-.selectionTitle {
-    margin-top: 70px;
-    height: 110px;
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.selectionTitle>p {
-    font-size: 25px;
-}
-
 .movieSessions {
-    margin: 25px;
+    margin: 25px 25px 120px 25px;
 }
 
 .session {
