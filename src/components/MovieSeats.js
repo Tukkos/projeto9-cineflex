@@ -1,10 +1,27 @@
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+
 import "./movieSeats.css";
 
 export default function MovieSeats() {
+    const params = useParams();
+    const [seats, setSeats] = useState([]);
 
-    // if(seats.length === 0) {
-    //     return <div className="selectionTitle"><img className="loading" src="https://www.lcrmscp.gov/assets/images/loader-bb533f76423cab3aa8f798501357e763.gif" /></div>;
-    // }
+    useEffect(() => {
+        const request = axios.get(
+            `https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${params.idSessao}/seats`
+        );
+
+        request.then((res) => {
+            setSeats(res.data);
+        })
+    }, [params.idSessao]);
+
+    if(seats.length === 0) {
+        return <div className="selectionTitle"><img className="loading" src="https://www.lcrmscp.gov/assets/images/loader-bb533f76423cab3aa8f798501357e763.gif" alt="" /></div>;
+    }
+    console.log(seats);
 
     return (
         <>
@@ -14,92 +31,14 @@ export default function MovieSeats() {
 
             <div className="seats">
 
-                <div>
-                    <div className="selected">13</div>
-                </div>
-                <div>
-                    <div className="selected">13</div>
-                </div>
-                <div>
-                    <div className="selected">13</div>
-                </div>
-                <div>
-                    <div className="selected">13</div>
-                </div>
-                <div>
-                    <div className="selected">13</div>
-                </div>
-                <div>
-                    <div className="selected">13</div>
-                </div>
-                <div>
-                    <div className="selected">13</div>
-                </div>
-                <div>
-                    <div className="selected">13</div>
-                </div>
-                <div>
-                    <div className="selected">13</div>
-                </div>
-                <div>
-                    <div className="selected">13</div>
-                </div>
-                <div>
-                    <div className="selected">13</div>
-                </div>
-                <div>
-                    <div className="selected">13</div>
-                </div>
-                <div>
-                    <div className="selected">13</div>
-                </div>
-                <div>
-                    <div className="selected">13</div>
-                </div>
-                <div>
-                    <div className="selected">13</div>
-                </div>
-                <div>
-                    <div className="selected">13</div>
-                </div>
-                <div>
-                    <div className="selected">13</div>
-                </div>
-                <div>
-                    <div className="selected">13</div>
-                </div>
-                <div>
-                    <div className="selected">13</div>
-                </div>
-                <div>
-                    <div className="selected">13</div>
-                </div>
-                <div>
-                    <div className="selected">13</div>
-                </div>
-                <div>
-                    <div className="selected">13</div>
-                </div>
-                <div>
-                    <div className="selected">13</div>
-                </div>
-                <div>
-                    <div className="selected">13</div>
-                </div>
-                <div>
-                    <div className="selected">13</div>
-                </div>
-                <div>
-                    <div className="selected">13</div>
-                </div>
-                <div>
-                    <div className="selected">13</div>
-                </div>
-                <div>
-                    <div className="selected">13</div>
-                </div>
-
+                {seats.seats.map((seat, index) => (
+                    
+                    <div key={index}>
+                        <div className="available">{seat.name}</div>
+                    </div>
+                ))}
                 
+                                
             </div>
 
             <div className="key">
@@ -126,11 +65,11 @@ export default function MovieSeats() {
 
             <div className="footerBox">
                 <div className="posterBox">
-                    <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/tnAuB8q5vv7Ax9UAEje5Xi4BXik.jpg" alt="" className="Patati Patata o Filme" />
+                    <img src={seats.movie.posterURL} alt="" className={seats.movie.title} />
                 </div>
                 <div>
-                    <p>Patati Patata o Filme</p>
-                    <p>Segunda-feira - 15:00</p>
+                    <p>{seats.movie.title}</p>
+                    <p>{seats.day.weekday} - {seats.name}</p>
                 </div>
             </div>
         </>

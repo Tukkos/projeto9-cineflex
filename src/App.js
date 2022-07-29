@@ -13,10 +13,10 @@ export default function App() {
 
             <Routes>
                 {/* LEMBRAR DE ARRUMAR OS PATHS--------------------------------------------------------------------------------- */}
-                <Route path="/aa" element={ <MoviesScreen /> } />
+                <Route path="/" element={ <MoviesScreen /> } />
 
                 <Route path="/sessoes/:idFilme" element={<MovieSessions />} />
-                <Route path="/" element={<MovieSeats />} />
+                <Route path="/assentos/:idSessao" element={<MovieSeats />} />
                 {/* <Route path="/sucesso" element={<SuccessScreen />} /> */}
             </Routes>
 

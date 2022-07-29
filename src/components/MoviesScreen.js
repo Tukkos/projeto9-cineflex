@@ -12,8 +12,9 @@ export default function MoviesScreen() {
 
         request.then(res => {
             setMovies(res.data);
+            console.log(movies);
         })
-    }, []);
+    }, [movies]);
 
     return (
         <>
@@ -23,9 +24,9 @@ export default function MoviesScreen() {
 
             <div className="movies">
                 {movies.map((movie, index) => (
-                    <div className="movieBanner">
+                    <div className="movieBanner" key={index}>
                         <Link to={`/sessoes/${movie.id}`}>
-                            <img src={movie.posterURL} alt={index} />
+                            <img src={movie.posterURL} alt={movie.title} />
                         </Link>
                     </div>
                 ))}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import "./movieSessions.css";
 
@@ -16,11 +16,13 @@ export default function MovieSessions() {
         request.then((res) => {
             setMovie(res.data);
         })
-    }, []);
+    }, [params.idFilme]);
 
     if(movie.length === 0) {
-        return <div className="selectionTitle"><img className="loading" src="https://www.lcrmscp.gov/assets/images/loader-bb533f76423cab3aa8f798501357e763.gif" /></div>;
+        return <div className="selectionTitle"><img className="loading" src="https://www.lcrmscp.gov/assets/images/loader-bb533f76423cab3aa8f798501357e763.gif" alt="" /></div>;
     }
+
+    console.log(movie);
 
     return (
         <>
@@ -30,12 +32,12 @@ export default function MovieSessions() {
 
             <div className="movieSessions">
 
-                {movie.days.map((day) => (
-                    <div className="session">
+                {movie.days.map((day, index) => (
+                    <div className="session" key={index}>
                         <p>{day.weekday} - {day.date}</p>
                         <div>
-                            {day.showtimes.map((showtime) => (
-                                <div className="times"><p>{showtime.name}</p></div>
+                            {day.showtimes.map((showtime, index) => (
+                                <Link to={`/assentos/${showtime.id}`} className="times" key={index} ><p>{showtime.name}</p></Link>
                             ))}
                         </div>
                     </div>
