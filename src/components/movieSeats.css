@@ -27,20 +27,20 @@
     align-items: center;
 }
 
-.selected {
-    width: 26px;
-    height: 26px;
-    background: #8DD7CF;
-    border: 1px solid #1AAE9E;
-    border-radius: 13px;
-    margin: 7px 7px 7px 7px;
-}
-
 .available {
     width: 26px;
     height: 26px;
     background: #C3CFD9;
     border: 1px solid #808F9D;
+    border-radius: 13px;
+    margin: 7px 7px 7px 7px;
+}
+
+.selected {
+    width: 26px;
+    height: 26px;
+    background: #8DD7CF;
+    border: 1px solid #1AAE9E;
     border-radius: 13px;
     margin: 7px 7px 7px 7px;
 }
@@ -57,7 +57,7 @@
 .inputs {
     display: flex;
     flex-direction: column;
-    margin: 15px 15px 120px 15px;
+    margin: 35px 15px 120px 15px;
     font-size: 20px;
 }
 
@@ -68,4 +68,16 @@
     font-size: 20px;
     font-style: italic;
     color: #AFAFAF;
+}
+
+.button {
+    margin: 10px auto 30px auto;
+    max-width: 230px;
+    width: 60vw;
+    height: 45px;
+    background: #E8833A;
+    border-radius: 3px;
+    border: 0;
+    font-size: 18px;
+    color: #ffffff;
 }

@@ -4,9 +4,15 @@ import { useParams } from "react-router-dom";
 
 import "./movieSeats.css";
 
+import Seats from "./Seats";
+
 export default function MovieSeats() {
     const params = useParams();
     const [seats, setSeats] = useState([]);
+
+    const [chosenSeats, setChosenSeats] = useState([]);
+    const [buyerName, setBuyerName] = useState("");
+    const [buyerCPF, setBuyerCPF] = useState("");
 
     useEffect(() => {
         const request = axios.get(
@@ -21,7 +27,23 @@ export default function MovieSeats() {
     if(seats.length === 0) {
         return <div className="selectionTitle"><img className="loading" src="https://www.lcrmscp.gov/assets/images/loader-bb533f76423cab3aa8f798501357e763.gif" alt="" /></div>;
     }
-    console.log(seats);
+
+    console.log(chosenSeats);
+
+    function toSucessScreen(event) {
+        event.preventDefault();
+
+        // const request = {ids: chosenSeats, name:buyerName, cpf:buyerCPF};
+
+        const request = axios.post("https://mock-api.driven.com.br/api/v7/cineflex/seats/book-many", {
+            ids: chosenSeats,
+            name: buyerName,
+            cpf: buyerCPF
+        })
+
+        request.then(console.log(request));
+        request.catch(alert("Favor rever seus dados e escolher pelo menos um assento disponível."));
+    }
 
     return (
         <>
@@ -30,15 +52,14 @@ export default function MovieSeats() {
             </div>
 
             <div className="seats">
-
                 {seats.seats.map((seat, index) => (
-                    
-                    <div key={index}>
-                        <div className="available">{seat.name}</div>
-                    </div>
-                ))}
-                
-                                
+                    <Seats key={index}
+                    seatId={seat.id}
+                    seatNumber={seat.name}
+                    isAvailable={seat.isAvailable}
+                    chosenSeats={chosenSeats}
+                    setChosenSeats={setChosenSeats} />
+                ))}                               
             </div>
 
             <div className="key">
@@ -56,12 +77,20 @@ export default function MovieSeats() {
                 </div>
             </div>
 
-            <div className="inputs">
+            <form onSubmit={toSucessScreen} className="inputs">
                 Nome do comprador:
-                <input type="text" placeholder="  Digite seu nome..." />
+                <input type="text"
+                    value={buyerName}
+                    onChange={e => setBuyerName(e.target.value)}
+                    placeholder="  Digite seu nome..." />
                 CPF do comprador:
-                <input type="text" placeholder="  Digite seu CPF..." />
-            </div>
+                <input type="number"
+                    max="99999999999"
+                    value={buyerCPF}
+                    onChange={e => setBuyerCPF(e.target.value)}
+                    placeholder="  Digite seu CPF..." />
+                <button type="submit" className="button">Reservar assento(s)</button>
+            </form>
 
             <div className="footerBox">
                 <div className="posterBox">
