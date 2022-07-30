@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import MoviesScreen from "./components/MoviesScreen";
 import MovieSessions from "./components/MovieSessions";
 import MovieSeats from "./components/MovieSeats";
+import SucessScreen from "./components/SucessScreen";
 
 export default function App() {
     return (
@@ -14,10 +15,9 @@ export default function App() {
             <Routes>
                 {/* LEMBRAR DE ARRUMAR OS PATHS--------------------------------------------------------------------------------- */}
                 <Route path="/" element={ <MoviesScreen /> } />
-
                 <Route path="/sessoes/:idFilme" element={<MovieSessions />} />
                 <Route path="/assentos/:idSessao" element={<MovieSeats />} />
-                {/* <Route path="/sucesso" element={<SuccessScreen />} /> */}
+                <Route path="/sucesso" element={<SucessScreen />} />
             </Routes>
 
         </BrowserRouter>

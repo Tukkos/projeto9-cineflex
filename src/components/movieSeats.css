@@ -75,9 +75,15 @@
     max-width: 230px;
     width: 60vw;
     height: 45px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     background: #E8833A;
     border-radius: 3px;
     border: 0;
     font-size: 18px;
     color: #ffffff;
+    text-decoration: none;
 }

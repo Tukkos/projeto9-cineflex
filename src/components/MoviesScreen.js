@@ -12,7 +12,7 @@ export default function MoviesScreen() {
 
         request.then(res => {
             setMovies(res.data);
-            console.log(movies);
+            // console.log(movies);
         })
     }, []);
 

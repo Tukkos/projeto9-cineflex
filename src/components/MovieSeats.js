@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import "./movieSeats.css";
 
@@ -9,7 +9,9 @@ import Seats from "./Seats";
 export default function MovieSeats() {
     const params = useParams();
     const [seats, setSeats] = useState([]);
+    const navigate = useNavigate();
 
+    const [chosenMovieSeats, setChosenMovieSeats] = useState([]);
     const [chosenSeats, setChosenSeats] = useState([]);
     const [buyerName, setBuyerName] = useState("");
     const [buyerCPF, setBuyerCPF] = useState("");
@@ -28,12 +30,8 @@ export default function MovieSeats() {
         return <div className="selectionTitle"><img className="loading" src="https://www.lcrmscp.gov/assets/images/loader-bb533f76423cab3aa8f798501357e763.gif" alt="" /></div>;
     }
 
-    console.log(chosenSeats);
-
     function toSucessScreen(event) {
         event.preventDefault();
-
-        // const request = {ids: chosenSeats, name:buyerName, cpf:buyerCPF};
 
         const request = axios.post("https://mock-api.driven.com.br/api/v7/cineflex/seats/book-many", {
             ids: chosenSeats,
@@ -41,8 +39,27 @@ export default function MovieSeats() {
             cpf: buyerCPF
         })
 
-        request.then(console.log(request));
-        request.catch(alert("Favor rever seus dados e escolher pelo menos um assento disponível."));
+        request.then(() => {
+            navigate("/sucesso", {state:{
+                movieTitle: seats.movie.title,
+                movieDay: seats.day.date,
+                movieTime: seats.name,
+                movieSeats: chosenMovieSeats,
+                buyerName: buyerName,
+                buyerCPF: buyerCPF
+            }})
+        })
+
+        // request.then(<Navigate
+        //     to="/sucesso"
+        //     movieTitle={seats.movie.title}
+        //     movieDay={seats.day.date}
+        //     movieTime={seats.name}
+        //     movieSeats={chosenMovieSeats}
+        //     buyerName={buyerName}
+        //     buyerCPF={buyerCPF}
+        //     />);
+        request.catch(alert("Favor rever seus dados."));
     }
 
     return (
@@ -53,12 +70,16 @@ export default function MovieSeats() {
 
             <div className="seats">
                 {seats.seats.map((seat, index) => (
-                    <Seats key={index}
-                    seatId={seat.id}
-                    seatNumber={seat.name}
-                    isAvailable={seat.isAvailable}
-                    chosenSeats={chosenSeats}
-                    setChosenSeats={setChosenSeats} />
+                    <Seats
+                        key={index}
+                        seatId={seat.id}
+                        seatNumber={seat.name}
+                        isAvailable={seat.isAvailable}
+                        chosenSeats={chosenSeats}
+                        setChosenSeats={setChosenSeats}
+                        chosenMovieSeats={chosenMovieSeats}
+                        setChosenMovieSeats={setChosenMovieSeats}
+                    />
                 ))}                               
             </div>
 
@@ -80,11 +101,13 @@ export default function MovieSeats() {
             <form onSubmit={toSucessScreen} className="inputs">
                 Nome do comprador:
                 <input type="text"
+                    minLength="3"
                     value={buyerName}
                     onChange={e => setBuyerName(e.target.value)}
                     placeholder="  Digite seu nome..." />
                 CPF do comprador:
                 <input type="number"
+                    minLength="11"
                     max="99999999999"
                     value={buyerCPF}
                     onChange={e => setBuyerCPF(e.target.value)}

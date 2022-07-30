@@ -1,0 +1,19 @@
+.sucess {
+    font-weight: 700;
+    color: #247A6B;
+}
+
+.infoBox {
+    margin-bottom: 60px;
+}
+
+.subTitle {
+    font-weight: 700;
+    font-size: 25px;
+    margin: 10px 20px 10px 20px;
+}
+
+.infos {
+    font-size: 20px;
+    margin: 5px 20px 5px 20px;
+}

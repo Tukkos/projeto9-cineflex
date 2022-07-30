@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./movieSeats.css";
 
-export default function Seats({seatId, seatNumber, isAvailable, chosenSeats, setChosenSeats}) {
+export default function Seats({seatId, seatNumber, isAvailable, chosenSeats, setChosenSeats, chosenMovieSeats, setChosenMovieSeats}) {
     const [unselectedSeat, setUnselectedSeat] = useState("available");
 
     function choseAnotherSeat() {
@@ -12,6 +12,10 @@ export default function Seats({seatId, seatNumber, isAvailable, chosenSeats, set
         if (unselectedSeat === "available") {
             setChosenSeats(chosenSeats.push(seatId));
             setChosenSeats(chosenSeats.sort());
+
+            setChosenMovieSeats(chosenMovieSeats.push(seatNumber));
+            setChosenMovieSeats(chosenMovieSeats.sort());
+
             setUnselectedSeat("selected");
         }
         if (unselectedSeat === "selected") {
@@ -21,6 +25,14 @@ export default function Seats({seatId, seatNumber, isAvailable, chosenSeats, set
                 }
             };
             setChosenSeats(chosenSeats.sort());
+
+            for (let i = 0; i < setChosenMovieSeats.length; i++) {
+                if (setChosenMovieSeats[i] === seatNumber) {
+                    setChosenMovieSeats(setChosenMovieSeats.splice(i,1));
+                }
+            };
+            setChosenMovieSeats(setChosenMovieSeats.sort());
+
             setUnselectedSeat("available");
         }
     };
