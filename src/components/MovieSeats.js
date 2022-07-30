@@ -34,22 +34,30 @@ export default function MovieSeats() {
     function toSucessScreen(event) {
         event.preventDefault();
 
-        const request = axios.post("https://mock-api.driven.com.br/api/v7/cineflex/seats/book-many", {
-            ids: chosenSeats,
-            name: buyerName,
-            cpf: buyerCPF
-        })
-
-        request.then(() => {
-            navigate("/sucesso", {state:{
-                movieTitle: seats.movie.title,
-                movieDay: seats.day.date,
-                movieTime: seats.name,
-                movieSeats: chosenMovieSeats,
-                buyerName: buyerName,
-                buyerCPF: buyerCPF
-            }})
-        })
+        if (buyerName === "") {
+            alert("Favor inserir seu nome");
+        } else if (buyerCPF === "") {
+            alert("Favor inserir seu cpf corretamente (11 digitos sem . ou -)");
+        } else if (chosenSeats.length === 0) {
+            alert("Favor escolher pelo menos um assento");
+        } else {
+            const request = axios.post("https://mock-api.driven.com.br/api/v7/cineflex/seats/book-many", {
+                ids: chosenSeats,
+                name: buyerName,
+                cpf: buyerCPF
+            })
+            console.log(chosenSeats);
+            request.then(() => {
+                navigate("/sucesso", {state:{
+                    movieTitle: seats.movie.title,
+                    movieDay: seats.day.date,
+                    movieTime: seats.name,
+                    movieSeats: chosenMovieSeats,
+                    buyerName: buyerName,
+                    buyerCPF: buyerCPF
+                }})
+            })
+            }
     }
 
     return (
