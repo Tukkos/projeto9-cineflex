@@ -15,6 +15,7 @@ export default function MovieSessions() {
 
         request.then((res) => {
             setMovie(res.data);
+            // console.log(movie);
         })
     }, [params.idFilme]);
 
@@ -31,7 +32,6 @@ export default function MovieSessions() {
             </div>
 
             <div className="movieSessions">
-
                 {movie.days.map((day, index) => (
                     <div className="session" key={index}>
                         <p>{day.weekday} - {day.date}</p>
@@ -42,8 +42,6 @@ export default function MovieSessions() {
                         </div>
                     </div>
                 ))}
-                
-                
             </div>
 
             <div className="footerBox">

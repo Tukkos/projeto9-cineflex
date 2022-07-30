@@ -16,6 +16,10 @@ export default function MoviesScreen() {
         })
     }, []);
 
+    if(movies.length === 0) {
+        return <div className="selectionTitle"><img className="loading" src="https://www.lcrmscp.gov/assets/images/loader-bb533f76423cab3aa8f798501357e763.gif" alt="" /></div>;
+    }
+
     return (
         <>
             <div className="selectionTitle">

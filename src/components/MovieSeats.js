@@ -23,6 +23,7 @@ export default function MovieSeats() {
 
         request.then((res) => {
             setSeats(res.data);
+            // console.log(seats);
         })
     }, [params.idSessao]);
 
@@ -49,17 +50,6 @@ export default function MovieSeats() {
                 buyerCPF: buyerCPF
             }})
         })
-
-        // request.then(<Navigate
-        //     to="/sucesso"
-        //     movieTitle={seats.movie.title}
-        //     movieDay={seats.day.date}
-        //     movieTime={seats.name}
-        //     movieSeats={chosenMovieSeats}
-        //     buyerName={buyerName}
-        //     buyerCPF={buyerCPF}
-        //     />);
-        request.catch(alert("Favor rever seus dados."));
     }
 
     return (

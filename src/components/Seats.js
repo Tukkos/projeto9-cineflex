@@ -1,20 +1,19 @@
 import { useState } from "react";
+
 import "./movieSeats.css";
 
 export default function Seats({seatId, seatNumber, isAvailable, chosenSeats, setChosenSeats, chosenMovieSeats, setChosenMovieSeats}) {
     const [unselectedSeat, setUnselectedSeat] = useState("available");
 
-    function choseAnotherSeat() {
-        alert("Esse assento não está disponível")
-    };
-
     function reserveSeat() {
         if (unselectedSeat === "available") {
             setChosenSeats(chosenSeats.push(seatId));
             setChosenSeats(chosenSeats.sort());
+            console.log(chosenSeats);
 
-            setChosenMovieSeats(chosenMovieSeats.push(seatNumber));
+            setChosenMovieSeats(chosenMovieSeats.push(Number(seatNumber)));
             setChosenMovieSeats(chosenMovieSeats.sort());
+            console.log(chosenMovieSeats);
 
             setUnselectedSeat("selected");
         }
@@ -25,16 +24,22 @@ export default function Seats({seatId, seatNumber, isAvailable, chosenSeats, set
                 }
             };
             setChosenSeats(chosenSeats.sort());
+            console.log(chosenSeats);
 
-            for (let i = 0; i < setChosenMovieSeats.length; i++) {
-                if (setChosenMovieSeats[i] === seatNumber) {
-                    setChosenMovieSeats(setChosenMovieSeats.splice(i,1));
+            for (let i = 0; i < chosenMovieSeats.length; i++) {
+                if (chosenMovieSeats[i] === Number(seatNumber)) {
+                    setChosenMovieSeats(chosenMovieSeats.splice(i,1));
                 }
             };
-            setChosenMovieSeats(setChosenMovieSeats.sort());
+            setChosenMovieSeats(chosenMovieSeats.sort());
+            console.log(chosenMovieSeats);
 
             setUnselectedSeat("available");
         }
+    };
+
+    function choseAnotherSeat() {
+        alert("Esse assento não está disponível")
     };
 
     return (

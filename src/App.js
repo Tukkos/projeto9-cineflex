@@ -13,7 +13,6 @@ export default function App() {
             <Header />
 
             <Routes>
-                {/* LEMBRAR DE ARRUMAR OS PATHS--------------------------------------------------------------------------------- */}
                 <Route path="/" element={ <MoviesScreen /> } />
                 <Route path="/sessoes/:idFilme" element={<MovieSessions />} />
                 <Route path="/assentos/:idSessao" element={<MovieSeats />} />
